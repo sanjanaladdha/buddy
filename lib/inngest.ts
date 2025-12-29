@@ -53,10 +53,33 @@ const checkInFunction = inngest.createFunction(
                         to: process.env.YOUR_EMAIL!,
                         subject: `Hey! Did you finish: ${title}?`,
                         html: `
-                            <h2>Time to check in!</h2>
-                            <p>You wanted to accomplish:</p>
-                            <p><strong>${title}</strong></p>
-                            <p>Did you finish it?</p>
+                            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 40px 20px;">
+                                <div style="text-align: center; margin-bottom: 30px;">
+                                    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjFhYWMxZjQ0YWZiankxNDRoeXE3aGNna2hmZGFscHdraWdodjRmcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6ZtebNZofcKMWis0/giphy.gif" alt="Time's up!" style="width: 150px; height: auto; border-radius: 12px;" />
+                                </div>
+                                
+                                <h1 style="color: #1f2937; font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 8px;">
+                                    Time to check in!
+                                </h1>
+                                
+                                <p style="color: #6b7280; font-size: 16px; text-align: center; margin-bottom: 30px;">
+                                    You wanted to accomplish:
+                                </p>
+                                
+                                <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 30px;">
+                                    <p style="color: #1f2937; font-size: 18px; font-weight: 500; text-align: center; margin: 0;">
+                                        ${title}
+                                    </p>
+                                </div>
+                                
+                                <p style="color: #6b7280; font-size: 16px; text-align: center; margin-bottom: 30px;">
+                                    Did you finish it? Go mark it done! ✓
+                                </p>
+                                
+                                <p style="color: #9ca3af; font-size: 12px; text-align: center;">
+                                    — Your Accountability Buddy
+                                </p>
+                            </div>
                         `,
                     });
                 });
