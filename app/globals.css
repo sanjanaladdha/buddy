@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #171717;
+  --muted: #737373;
+  --border: #e5e5e5;
+  --accent: #374151;
+  --accent-hover: #1f2937;
+  --success: #22c55e;
 }
 
 @theme inline {
@@ -12,15 +17,142 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.animate-checkmark {
+  animation: checkmark 0.3s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Staggered animations for list items */
+.task-item {
+  opacity: 0;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.task-item:nth-child(1) { animation-delay: 0ms; }
+.task-item:nth-child(2) { animation-delay: 50ms; }
+.task-item:nth-child(3) { animation-delay: 100ms; }
+.task-item:nth-child(4) { animation-delay: 150ms; }
+.task-item:nth-child(5) { animation-delay: 200ms; }
+.task-item:nth-child(6) { animation-delay: 250ms; }
+.task-item:nth-child(7) { animation-delay: 300ms; }
+.task-item:nth-child(8) { animation-delay: 350ms; }
+.task-item:nth-child(9) { animation-delay: 400ms; }
+.task-item:nth-child(10) { animation-delay: 450ms; }
+
+/* Custom checkbox */
+.custom-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d4d4d4;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.custom-checkbox:hover {
+  border-color: #a3a3a3;
+}
+
+.custom-checkbox:checked {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  animation: checkmark 0.2s ease-out;
+}
+
+/* Focus styles */
+.custom-checkbox:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* Button transitions need to be faster */
+button {
+  transition: all 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.98);
 }
