@@ -16,11 +16,17 @@ export const inngest = new Inngest({
 // =============================================================================
 // RESEND CLIENT (for sending emails)
 // =============================================================================
-// Resend is initialized with your API key from environment variables.
-// We'll use this inside our Inngest function to send reminder emails.
+// Resend is initialized lazily (only when needed) to avoid build-time errors.
+// The API key is only required at runtime when actually sending emails.
 // =============================================================================
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResendClient() {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+        throw new Error("RESEND_API_KEY is not set in environment variables");
+    }
+    return new Resend(apiKey);
+}
 
 const checkInFunction = inngest.createFunction(
     { id: "check-in",
@@ -41,6 +47,7 @@ const checkInFunction = inngest.createFunction(
 
             if (!taskIsDone) {
                 await step.run("send-reminder-email", async () => {
+                    const resend = getResendClient();
                     await resend.emails.send({
                         from: "Accountability Buddy <onboarding@resend.dev>",
                         to: process.env.YOUR_EMAIL!,
