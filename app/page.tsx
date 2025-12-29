@@ -377,7 +377,7 @@ export default function Home() {
 
         {/* Footer */}
         <p className="text-center text-xs text-gray-400 mt-12">
-          Built with Inngest · Check-ins happen automatically
+          Built with <span className="line-through">Ingest</span> <span className="line-through">Inggest</span> Inngest ♥
         </p>
       </div>
     </div>
